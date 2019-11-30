@@ -6,7 +6,7 @@ target 'Friends' do
   use_frameworks!
 #
 
-pod 'IQKeyboardManager'
+#pod 'IQKeyboardManager'
   # Pods for Friends
 
 end

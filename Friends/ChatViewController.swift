@@ -20,6 +20,7 @@ class ChatViewController: UIViewController {
     }
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    var tapGesture: UITapGestureRecognizer?
     
     var messages = [Message]()
     override func viewDidLoad() {
@@ -42,10 +43,35 @@ class ChatViewController: UIViewController {
         ]
         
         messageTextView.addObserver(self, forKeyPath: #keyPath(UITextView.contentSize), options: [.new, .old], context: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @IBAction func actionSend(_ sender: Any) {
         
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+                tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+                self.view.addGestureRecognizer(tapGesture!)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+            if tapGesture != nil {
+                self.view.removeGestureRecognizer(tapGesture!)
+            }
+        }
+    }
+    
+    @objc func actionTapGesture() {
+        messageTextView.resignFirstResponder()
     }
     
     override func observeValue(forKeyPath keyPath: String?,
@@ -54,16 +80,23 @@ class ChatViewController: UIViewController {
                                context: UnsafeMutableRawPointer?) {
         
         if let textView = object as? UITextView {
-            let newContentSize = textViewHeightConstraint.constant
+            let newContentSize = textView.contentSize.height
             if newContentSize < 100 {
                 textViewHeightConstraint.constant = newContentSize
                 textView.isScrollEnabled = true
             } else {
                 textViewHeightConstraint.constant = 100
-                textView.isScrollEnabled = false
+                textView.isScrollEnabled = true
             }
         }
-        
+    }
+    
+    deinit {
+        messageTextView.removeObserver(self, forKeyPath: #keyPath(UITextView.contentSize))
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if 
     }
 }
 

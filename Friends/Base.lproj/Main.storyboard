@@ -29,7 +29,7 @@
                                             <constraint firstAttribute="height" constant="1" id="60l-p5-h2U"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text=" " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-P9-C5W">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text=" " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-P9-C5W">
                                         <rect key="frame" x="20" y="6" width="339" height="35"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -37,11 +37,13 @@
                                         </constraints>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eI7-oU-fmc">
-                                        <rect key="frame" x="364" y="1" width="50" height="45"/>
+                                        <rect key="frame" x="364" y="6" width="50" height="35"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="HjX-QZ-WBD"/>
                                             <constraint firstAttribute="width" constant="50" id="SZV-2g-6HV"/>
                                         </constraints>
                                         <state key="normal" title="Send"/>
@@ -55,12 +57,11 @@
                                     <constraint firstItem="bYk-P9-C5W" firstAttribute="leading" secondItem="2Vi-vE-SwH" secondAttribute="leading" constant="20" id="4cB-wp-0im"/>
                                     <constraint firstItem="v5H-np-MHm" firstAttribute="leading" secondItem="2Vi-vE-SwH" secondAttribute="leading" id="GAh-6i-6HX"/>
                                     <constraint firstItem="eI7-oU-fmc" firstAttribute="leading" secondItem="bYk-P9-C5W" secondAttribute="trailing" constant="5" id="OTd-hm-fO2"/>
+                                    <constraint firstItem="eI7-oU-fmc" firstAttribute="top" secondItem="bYk-P9-C5W" secondAttribute="top" id="Ojp-9O-hBZ"/>
                                     <constraint firstItem="bYk-P9-C5W" firstAttribute="top" secondItem="v5H-np-MHm" secondAttribute="bottom" constant="5" id="Ov3-ws-yrk"/>
                                     <constraint firstItem="v5H-np-MHm" firstAttribute="top" secondItem="2Vi-vE-SwH" secondAttribute="top" id="T45-Wy-P4d"/>
-                                    <constraint firstItem="eI7-oU-fmc" firstAttribute="top" secondItem="v5H-np-MHm" secondAttribute="bottom" id="TwC-ef-KTg"/>
                                     <constraint firstAttribute="trailing" secondItem="eI7-oU-fmc" secondAttribute="trailing" id="ZkI-Vc-F1K"/>
                                     <constraint firstAttribute="bottom" secondItem="bYk-P9-C5W" secondAttribute="bottom" constant="5" id="haJ-gQ-mTn"/>
-                                    <constraint firstAttribute="bottom" secondItem="eI7-oU-fmc" secondAttribute="bottom" id="khf-zi-RH6"/>
                                     <constraint firstAttribute="trailing" secondItem="v5H-np-MHm" secondAttribute="trailing" id="qRR-eK-KW0"/>
                                 </constraints>
                             </view>
