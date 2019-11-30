@@ -15,10 +15,12 @@ class ReceivedMessageTableViewCell: UITableViewCell {
 	
 	override func awakeFromNib() {
         super.awakeFromNib()
+        configureView()
 	}
 	
 	func configureView() {
-		
+        labelBackgroundView.layer.cornerRadius = 5
+        labelBackgroundView.clipsToBounds = true
 	}
    
 	func configueCell(message: String) {

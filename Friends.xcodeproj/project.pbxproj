@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A7406BD2392768E00C0794A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7406BC2392768E00C0794A /* Message.swift */; };
 		9DB42B0C2390382D00B70777 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB42B0B2390382D00B70777 /* AppDelegate.swift */; };
 		9DB42B0E2390382D00B70777 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB42B0D2390382D00B70777 /* SceneDelegate.swift */; };
 		9DB42B102390382D00B70777 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB42B0F2390382D00B70777 /* ChatViewController.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		0F20F5AEB23A8DA0BF82FE92 /* Pods-Friends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friends.release.xcconfig"; path = "Target Support Files/Pods-Friends/Pods-Friends.release.xcconfig"; sourceTree = "<group>"; };
 		4810FC9663B03BD53864E737 /* Pods-Friends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friends.debug.xcconfig"; path = "Target Support Files/Pods-Friends/Pods-Friends.debug.xcconfig"; sourceTree = "<group>"; };
+		4A7406BC2392768E00C0794A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		71EBDF70C4014D598290607B /* Pods_Friends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Friends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB42B082390382D00B70777 /* Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB42B0B2390382D00B70777 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				9DB42B142390383400B70777 /* Assets.xcassets */,
 				9DB42B162390383400B70777 /* LaunchScreen.storyboard */,
 				9DB42B192390383400B70777 /* Info.plist */,
+				4A7406BC2392768E00C0794A /* Message.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -165,7 +168,6 @@
 				9DB42B042390382D00B70777 /* Sources */,
 				9DB42B052390382D00B70777 /* Frameworks */,
 				9DB42B062390382D00B70777 /* Resources */,
-				35D794F232721628F4DB848F /* [CP] Embed Pods Frameworks */,
 				9DB42B26239040D500B70777 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -226,23 +228,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		35D794F232721628F4DB848F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Friends/Pods-Friends-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Friends/Pods-Friends-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Friends/Pods-Friends-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D98DF10E53772E2321468339 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -275,6 +260,7 @@
 				9DC4FE8823917BA100ED0433 /* SendedMessageTableViewCell.swift in Sources */,
 				9DB42B102390382D00B70777 /* ChatViewController.swift in Sources */,
 				9DC4FE8E23917C3900ED0433 /* ReceivedMessageTableViewCell.swift in Sources */,
+				4A7406BD2392768E00C0794A /* Message.swift in Sources */,
 				9DB42B0C2390382D00B70777 /* AppDelegate.swift in Sources */,
 				9DB42B0E2390382D00B70777 /* SceneDelegate.swift in Sources */,
 			);

@@ -11,11 +11,18 @@ import UIKit
 class SendedMessageTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var messageLabel: UILabel!
-	
+    @IBOutlet weak var labelBackgroundView: UIView!
+    
 	override func awakeFromNib() {
 		super.awakeFromNib()
+        configureView()
 	}
 	
+    func configureView() {
+        labelBackgroundView.layer.cornerRadius = 5
+        labelBackgroundView.clipsToBounds = true
+    }
+    
 	func configueCell(message: String) {
 		self.messageLabel.text = message
 	}
