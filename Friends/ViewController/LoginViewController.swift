@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 	
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
@@ -18,8 +18,8 @@ class LoginViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		emailTextField.text = "test1@gmail.com"
-		passwordTextField.text = "test@123"
+		emailTextField.text = "test_135626@gmail.com"
+		passwordTextField.text = "dummy@123"
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -37,5 +37,15 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func actionLogin(_ sender: Any) {
+		showLoader()
+		Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+			if let error = error {
+				print(error)
+			}
+			print("Login successfully")
+			hideLoader()
+			appDelegate.redirectToViewController()
+			
+		}
 	}
 }

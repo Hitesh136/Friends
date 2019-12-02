@@ -10,6 +10,7 @@ target 'Friends' do
 	pod "Firebase/Database"
 	pod "Firebase/Storage"
 	pod 'SVProgressHUD'
+	pod 'IQKeyboardManagerSwift'
 #pod 'IQKeyboardManager'
   # Pods for Friends
 

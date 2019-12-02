@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: BaseViewController {
 	
 	@IBOutlet weak var tableView: UITableView! {
 		didSet {
@@ -56,29 +56,6 @@ class ChatViewController: UIViewController {
 		
 	}
 	
-	@objc func keyboardWillShow(notification: NSNotification) {
-		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-			if self.view.frame.origin.y == 0 {
-				self.view.frame.origin.y -= (keyboardSize.height - 50)
-				tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
-				self.view.addGestureRecognizer(tapGesture!)
-			}
-		}
-	}
-	
-	@objc func keyboardWillHide(notification: NSNotification) {
-		if self.view.frame.origin.y != 0 {
-			self.view.frame.origin.y = 0
-			if tapGesture != nil {
-				self.view.removeGestureRecognizer(tapGesture!)
-			}
-		}
-	}
-	
-	@objc func actionTapGesture() {
-		messageTextView.resignFirstResponder()
-	}
-	
 	override func observeValue(forKeyPath keyPath: String?,
 														 of object: Any?,
 														 change: [NSKeyValueChangeKey : Any]?,
@@ -102,6 +79,30 @@ class ChatViewController: UIViewController {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		
+	}
+	@objc func keyboardWillShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			guard let topViewController = CommonClass.topViewController() else { return }
+			if topViewController.view.frame.origin.y == 0 {
+				topViewController.view.frame.origin.y -= (keyboardSize.height)
+				tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionTapGesture))
+				topViewController.view.addGestureRecognizer(tapGesture!)
+			}
+		}
+	}
+	
+	@objc func keyboardWillHide(notification: NSNotification) {
+		guard let topViewController = CommonClass.topViewController() else { return }
+		if topViewController.view.frame.origin.y != 0 {
+			topViewController.view.frame.origin.y = 0
+			if tapGesture != nil {
+				topViewController.view.removeGestureRecognizer(tapGesture!)
+			}
+		}
+	}
+	
+	@objc func actionTapGesture() {
+		CommonClass.topViewController()?.view.endEditing(true)
 	}
 }
 

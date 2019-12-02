@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: BaseViewController {
 	
 	var databaseHandle: DatabaseHandle!
 	
@@ -119,7 +119,8 @@ extension ProfileViewController {
 				return
 			}
 			self.updateFirebaserUser(withUserid: userId)
-			UserDefaults.isLogined = true
+			
+			print("Regiser successfully")
 			appDelegate.redirectToViewController()
 		}
 	}

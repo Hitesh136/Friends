@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		FirebaseApp.configure()
 		SVProgressHUD.setDefaultMaskType(.gradient)
+		IQKeyboardManager.shared.enable = true
+		IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self]
 		showViewController()
 		return true
 	}

@@ -7,15 +7,8 @@
 //
 
 import Foundation
+import Firebase
 
 extension UserDefaults {
 	
-	static var isLogined: Bool {
-		set {
-			UserDefaults.standard.set(newValue, forKey: "isLogined")
-		}
-		get {
-			return UserDefaults.standard.bool(forKey: "isLogined")
-		}
-	}
 }
