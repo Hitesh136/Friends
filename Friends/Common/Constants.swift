@@ -12,3 +12,7 @@ import UIKit
 var appDelegate: AppDelegate {
 	return UIApplication.shared.delegate as! AppDelegate
 }
+
+enum AppConstants {
+    static let users = "users"
+}

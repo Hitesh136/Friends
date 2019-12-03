@@ -21,7 +21,7 @@ class ChatViewController: BaseViewController {
 	@IBOutlet weak var messageTextView: UITextView!
 	@IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
 	var tapGesture: UITapGestureRecognizer?
-	
+    var userViewModel: UserViewModel!
 	var messages = [Message]()
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,7 +41,7 @@ class ChatViewController: BaseViewController {
 			Message(text: "sdfhasdjkflhasdfdfaskdfhasj jakfdlhaskj jkash jkaslhf kljashf ", messageType: .sendedText),
 			Message(text: "Hfsadf", messageType: .receivedText)
 		]
-		
+		 
 		messageTextView.layer.cornerRadius = messageTextView.frame.height / 2
 		messageTextView.clipsToBounds = true
 		messageTextView.layer.borderColor = UIColor(named: "AppBlue")?.cgColor
@@ -50,6 +50,7 @@ class ChatViewController: BaseViewController {
 		messageTextView.addObserver(self, forKeyPath: #keyPath(UITextView.contentSize), options: [.new, .old], context: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        title = userViewModel.userName 
 	}
 	
 	@IBAction func actionSend(_ sender: Any) {

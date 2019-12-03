@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FirebaseApp.configure()
-		SVProgressHUD.setDefaultMaskType(.gradient)
+		SVProgressHUD.setDefaultMaskType(.black)
 		IQKeyboardManager.shared.enable = true
 		IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self]
 		showViewController()

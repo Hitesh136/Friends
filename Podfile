@@ -11,6 +11,7 @@ target 'Friends' do
 	pod "Firebase/Storage"
 	pod 'SVProgressHUD'
 	pod 'IQKeyboardManagerSwift'
+  pod 'Kingfisher', '~> 5.0'
 #pod 'IQKeyboardManager'
   # Pods for Friends
 

@@ -24,7 +24,7 @@ class ProfileViewController: BaseViewController {
 	@IBOutlet weak var phoneTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
 	
-	lazy var userId: String = {
+	lazy var localUserId: String = {
 		return "_\(Int.random(in: 0...1000000))"
 	}()
 	
@@ -44,53 +44,72 @@ class ProfileViewController: BaseViewController {
 	}
 	
 	func configureView() {
-		emailTextField.text = "test\(userId)@gmail.com"
-		userNameTextField.text = "first_test\(userId)"
-		lastNameTextField.text = "last_test\(userId)"
-		countryTextField.text = "country\(userId)"
-		cityTextField.text = "city\(userId)"
-		phoneTextField.text = "phone\(userId)"
+		emailTextField.text = "test\(localUserId)@gmail.com"
+		userNameTextField.text = "first_test\(localUserId)"
+		lastNameTextField.text = "last_test\(localUserId)"
+		countryTextField.text = "country\(localUserId)"
+		cityTextField.text = "city\(localUserId)"
+		phoneTextField.text = "phone\(localUserId)"
 		passwordTextField.text = "dummy@123"
+        
+        userImageView.layer.cornerRadius = (userImageView.frame.height / 2)
+        userImageView.clipsToBounds = true
 	}
 	
 	
-	@IBAction func actionDone(_ sender: Any) {
-		
-		//		let profileViewController = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-		//		self.navigationController?.pushViewController(profileViewController, animated: true)
-		//		if let uploadData = userImageView.image?.jpegData(compressionQuality: 0.1) {
-		//			let storageRef = Storage.storage().reference().child("images/image\(userId).png")
-		//			storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-		//				if let error = error {
-		//					print(error)
-		//					return
-		//				}
-		//
-		//				storageRef.downloadURL { [weak self] (url, error) in
-		//					guard let self = self else { return	}
-		//					if let absoluteString = url?.absoluteString {
-		//						self.createFirebaseUser(imageURL: absoluteString)
-		//					}
-		//				}
-		//			}
-		//		}
+    @IBAction func actionDone(_ sender: Any) {
+       
 	}
+    
+    func uploadImage(withUserId userId: String) {
+        if let uploadData = userImageView.image?.jpegData(compressionQuality: 0.1) {
+            let storageRef = Storage.storage().reference().child("images/image\(userId).png")
+            storageRef.putData(uploadData, metadata: nil) { [weak self] (metadata, error) in
+            
+                if let error = error {
+                    hideLoader()
+                    print(error)
+                    return
+                }
+                
+                
+                storageRef.downloadURL { [weak self] (url, error) in
+                    guard let self = self else {
+                        hideLoader()
+                        return
+                    }
+                    if let absoluteString = url?.absoluteString {
+                        self.updateFirebaserUser(withUserid: userId, andWithImageURL: absoluteString)
+                    }
+                    hideLoader()
+                }
+            }
+        }
+    }
 	
-	func updateFirebaserUser(withUserid userId: String) {
+    func updateFirebaserUser(withUserid userId: String, andWithImageURL imageURL: String) {
 		let newUser: [String: Any] = [
 			"city": cityTextField.text!,
 			"country": countryTextField.text!,
 			"firstName": userNameTextField.text!,
 			"lastName": lastNameTextField.text!,
 			"phone": phoneTextField.text!,
-			//			"profileURL": imageURL
+            "email": emailTextField.text!,
+            "profileURL": imageURL
 		]
-		ref.child("users").child(userId).updateChildValues(newUser)
+        ref.child(AppConstants.users).child(userId).updateChildValues(newUser)
+        print("Regiser successfully")
+        appDelegate.redirectToViewController()
 	}
 }
 
 extension ProfileViewController {
 	@IBAction func actionProfile(_ sender: Any) {
+        let imagPickerViewController = UIImagePickerController()
+        imagPickerViewController.delegate = self
+        imagPickerViewController.sourceType = .photoLibrary;
+        imagPickerViewController.allowsEditing = true
+        present(imagPickerViewController, animated: true, completion: nil)
 	}
 	
 	@IBAction func actionCancel(_ sender: Any) {
@@ -107,21 +126,38 @@ extension ProfileViewController {
 		showLoader()
 		Auth.auth().createUser(withEmail: email, password: passowrd) { [weak self] (authResult, error) in
 			
-			hideLoader()
-			guard let self = self else { return }
+			
+			guard let self = self else {
+                hideLoader()
+                return
+            }
 			
 			if let error = error {
 				print(error)
+                hideLoader()
 				return
 			}
 			
 			guard let userId = authResult?.user.uid else {
+                hideLoader()
 				return
 			}
-			self.updateFirebaserUser(withUserid: userId)
-			
-			print("Regiser successfully")
-			appDelegate.redirectToViewController()
+            self.uploadImage(withUserId: userId)
 		}
 	}
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        guard let editedImage = (info[.editedImage] ?? info[.originalImage])as? UIImage else { return }
+        userImageView.image = editedImage
+    }
 }

@@ -11,24 +11,49 @@ import FirebaseDatabase
 
 class UsersViewController: UIViewController {
 	
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "UserTableViewCell")
+            tableView.tableFooterView = UIView()
+        }
+    }
+    
+    let userListViewModel = UserListViewModel()
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		// Do any additional setup after loading the view.
-		
-		
-	}
-	
-	
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destination.
-	// Pass the selected object to the new view controller.
-	}
-	*/
-	
+        configueView()
+        configuerViewModel()
+	} 
+
+    func configueView() {
+        title = "Users"
+    }
+    func configuerViewModel() {
+        userListViewModel.getUsers { [weak self] (success) in
+            self?.tableView.reloadData()
+        }
+    }
+}
+
+extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userListViewModel.rowCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let viewModel = userListViewModel.viewModel(atIndex: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell", for: indexPath) as! UserTableViewCell
+        cell.bind(withViewModel: viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let chatViewController = storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+            chatViewController.userViewModel = userListViewModel.viewModel(atIndex: indexPath.row)
+            self.navigationController?.pushViewController(chatViewController, animated: true)
+        } 
+    }
 }
