@@ -31,6 +31,7 @@ class UserListViewModel {
                 completion(true)
             case .failure(let error):
                 print(error)
+                completion(false)
             }
         }
     } 

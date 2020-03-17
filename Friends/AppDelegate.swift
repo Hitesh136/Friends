@@ -15,10 +15,16 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FirebaseApp.configure()
+        
+//        do {
+//            xmppController = try XMPPController(hostName: "host.com", userJIDString: "user@host.com", password: "password")
+//            xmppController.connect()
+//        } catch let error {
+//            print("XMPPController init Error: \(error)")
+//        }
 		SVProgressHUD.setDefaultMaskType(.black)
 		IQKeyboardManager.shared.enable = true
 		IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self]

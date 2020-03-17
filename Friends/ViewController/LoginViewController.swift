@@ -18,8 +18,10 @@ class LoginViewController: BaseViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		emailTextField.text = "test_135626@gmail.com"
+		emailTextField.text = "test1@gmail.com"
 		passwordTextField.text = "dummy@123"
+        
+        emailTextField.borderStyle = .roundedRect
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -41,11 +43,12 @@ class LoginViewController: BaseViewController {
 		Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
 			if let error = error {
 				print(error)
-			}
-			print("Login successfully")
-			hideLoader()
-			appDelegate.redirectToViewController()
-			
+                print("Login Failded: \(error.localizedDescription)")
+            } else {
+                print("Login successfully")
+                hideLoader()
+                appDelegate.redirectToViewController()
+            }
 		}
 	}
 }

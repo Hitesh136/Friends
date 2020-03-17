@@ -7,8 +7,13 @@
 //
 
 import Foundation
- 
+import Firebase
+
 struct User: Codable {
     let city, country, firstName, email, lastName, profileURL: String
     let phone: String
+    
+    static var isLogined: Bool {
+        return Auth.auth().currentUser?.uid != nil
+    }
 }

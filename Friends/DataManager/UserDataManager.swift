@@ -24,10 +24,7 @@ class UserDataManager: NSObject {
             if let usersDict = snapshot.value as? [String: Any] {
                 let keys = Array(usersDict.keys)
                 for key in keys {
-                    
-                    guard key != currentUserId else {
-                        continue
-                    }
+                     
                     if let userDict = usersDict[key] as? [String: Any] {
                         let userModel = User(city: userDict["city"] as! String,
                                              country: userDict["country"] as! String,
@@ -37,7 +34,11 @@ class UserDataManager: NSObject {
                                              profileURL: userDict["profileURL"] as! String,
                                              phone: userDict["phone"] as! String)
                         
-                        userViewModels.append(UserViewModel(user: userModel))
+                        if key == currentUserId {
+                            UserDefaults.user = userModel
+                        } else {
+                            userViewModels.append(UserViewModel(user: userModel))
+                        }
                     }
                 }
                 completion(.success(userViewModels))

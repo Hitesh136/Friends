@@ -20,7 +20,7 @@ func hideLoader() {
 
 class CommonClass {
 	static func getInitialViewController() -> UIViewController {
-		if Auth.auth().currentUser?.uid != nil {
+        if User.isLogined {
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			return storyboard.instantiateViewController(withIdentifier: "AppTabBarController") as! AppTabBarController
 		} else {

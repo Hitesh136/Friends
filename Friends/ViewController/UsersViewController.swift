@@ -8,9 +8,13 @@
 
 import UIKit
 import FirebaseDatabase
+import Kingfisher
 
 class UsersViewController: UIViewController {
 	
+    @IBOutlet var userInfoView: UIView!
+    @IBOutlet weak var currentUserImageView: UIImageView!
+    @IBOutlet weak var currentUserName: UILabel!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -29,11 +33,28 @@ class UsersViewController: UIViewController {
 
     func configueView() {
         title = "Users"
+        currentUserImageView.layer.cornerRadius = 20
+        currentUserImageView.clipsToBounds = true
     }
+    
     func configuerViewModel() {
         userListViewModel.getUsers { [weak self] (success) in
-            self?.tableView.reloadData()
+            
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            self.showUserInTitleView()
         }
+    }
+    
+    func showUserInTitleView() {
+        guard let user = UserDefaults.user else { return }
+        currentUserName.text = user.firstName
+        
+        if let profileURL = URL(string: user.profileURL) {
+            currentUserImageView.kf.setImage(with: profileURL, placeholder: #imageLiteral(resourceName: "avatarPlaceholder"))
+        }
+        
+        navigationItem.titleView = userInfoView
     }
 }
 

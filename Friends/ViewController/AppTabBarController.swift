@@ -7,15 +7,31 @@
 //
 
 import UIKit
+import Firebase
+import XMPPFramework
 
 class AppTabBarController: UITabBarController {
 	
+    var handle: AuthStateDidChangeListenerHandle!
+    var xmppStream: XMPPStream!
+    
+    var hostName: String!
+    var userJID: XMPPJID!
+    var hostPort: UInt16!
+    var password: String!
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		tabBar.tintColor = UIColor(named: "AppBlue")
 		loadViewControllersView()
 		setTabBarItems()
+        
+        do {
+            try configure_XMPP(hostName: "host.com", userJIDString: "user@host.com", password: "password")
+        } catch let error {
+            print(error)
+        }
 	}
 	
 	func setTabBarItems() {
@@ -42,4 +58,29 @@ class AppTabBarController: UITabBarController {
 			_ = viewController.view
 		}
 	}
+    
+    func configure_XMPP(hostName: String,
+         userJIDString: String,
+         hostPort: UInt16 = 5222,
+         password: String) throws {
+        
+        guard let userJID = XMPPJID(string: userJIDString) else {
+            throw XMPPControllerError.wrongUserJID
+        }
+    
+        self.hostName = hostName
+        self.userJID = userJID
+        self.hostPort = hostPort
+        self.password = password
+        
+        xmppStream = XMPPStream()
+        xmppStream.hostName = hostName
+        xmppStream.myJID = userJID
+        xmppStream.hostPort = hostPort
+        xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicy.allowed
+        
+//        super.init()
+        xmppStream.addDelegate(self, delegateQueue: DispatchQueue.main)
+        connect()
+    }
 }

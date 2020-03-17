@@ -12,6 +12,11 @@ target 'Friends' do
 	pod 'SVProgressHUD'
 	pod 'IQKeyboardManagerSwift'
   pod 'Kingfisher', '~> 5.0'
+#  pod 'XMPPFramework/Swift'
+pod 'XMPPFramework', :git => "https://github.com/robbiehanson/XMPPFramework.git"
+#  pod 'XMPPFramework', :git => "https://github.com/robbiehanson/XMPPFramework.git", :branch => 'master'
+#  pod 'XMPPFramework'
+#  , :git=> 'git@github.com:robbiehanson/XMPPFramework.git', :branch => 'master'
 #pod 'IQKeyboardManager'
   # Pods for Friends
 

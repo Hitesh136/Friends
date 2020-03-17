@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import Firebase
 
 class ProfileViewController: BaseViewController {
 	
@@ -23,8 +24,11 @@ class ProfileViewController: BaseViewController {
 	@IBOutlet weak var cityTextField: UITextField!
 	@IBOutlet weak var phoneTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
-	
-	lazy var localUserId: String = {
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
+    @IBOutlet weak var logoutBarButton: UIBarButtonItem!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    lazy var localUserId: String = {
 		return "_\(Int.random(in: 0...1000000))"
 	}()
 	
@@ -54,12 +58,31 @@ class ProfileViewController: BaseViewController {
         
         userImageView.layer.cornerRadius = (userImageView.frame.height / 2)
         userImageView.clipsToBounds = true
+        
+        //Manage Navigationbar buttons
+//        if User.isLogined {
+        if true { 
+            navigationItem.leftBarButtonItem = nil
+            registerButton.setTitle("Update", for: .normal)
+        } else {
+            navigationItem.rightBarButtonItem = nil
+            registerButton.setTitle("Register", for: .normal)
+        }
 	}
 	
 	
     @IBAction func actionDone(_ sender: Any) {
        
 	}
+    
+    @IBAction func actionLogout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            appDelegate.redirectToViewController()
+        } catch let error {
+            print("SingOut Error:\(error)")
+        }
+    }
     
     func uploadImage(withUserId userId: String) {
         if let uploadData = userImageView.image?.jpegData(compressionQuality: 0.1) {

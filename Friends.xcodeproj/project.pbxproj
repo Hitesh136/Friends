@@ -39,6 +39,8 @@
 		9DC4FE8923917BA100ED0433 /* SendedMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC4FE8723917BA100ED0433 /* SendedMessageTableViewCell.xib */; };
 		9DC4FE8E23917C3900ED0433 /* ReceivedMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC4FE8C23917C3900ED0433 /* ReceivedMessageTableViewCell.swift */; };
 		9DC4FE8F23917C3900ED0433 /* ReceivedMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC4FE8D23917C3900ED0433 /* ReceivedMessageTableViewCell.xib */; };
+		FF95318623ABD75B00542119 /* XMPPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF95318523ABD75B00542119 /* XMPPController.swift */; };
+		FFED8E9023D833B900FC938D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFED8E8F23D833B900FC938D /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +95,8 @@
 		9DC4FE8723917BA100ED0433 /* SendedMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendedMessageTableViewCell.xib; sourceTree = "<group>"; };
 		9DC4FE8C23917C3900ED0433 /* ReceivedMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedMessageTableViewCell.swift; sourceTree = "<group>"; };
 		9DC4FE8D23917C3900ED0433 /* ReceivedMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivedMessageTableViewCell.xib; sourceTree = "<group>"; };
+		FF95318523ABD75B00542119 /* XMPPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPPController.swift; sourceTree = "<group>"; };
+		FFED8E8F23D833B900FC938D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +202,7 @@
 		9DB42B0A2390382D00B70777 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				FF95318423ABD74400542119 /* XMPP */,
 				4A44196D239626F700884A55 /* ServiceManager */,
 				4A44196A239625D100884A55 /* DataManager */,
 				4A441967239625A800884A55 /* Model */,
@@ -224,6 +229,7 @@
 				9DBB58E82393931900C00563 /* AppTabBarController.swift */,
 				9DB42B0F2390382D00B70777 /* ChatViewController.swift */,
 				9DBB58ED2393A08700C00563 /* LoginViewController.swift */,
+				FFED8E8F23D833B900FC938D /* LoginView.swift */,
 				9DBB58EF2393A09400C00563 /* ProfileViewController.swift */,
 				9D3CCA6A2395730400030D92 /* SettingViewController.swift */,
 				9D41EB1C23957CFF006086B3 /* UsersViewController.swift */,
@@ -276,6 +282,14 @@
 				71EBDF70C4014D598290607B /* Pods_Friends.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF95318423ABD74400542119 /* XMPP */ = {
+			isa = PBXGroup;
+			children = (
+				FF95318523ABD75B00542119 /* XMPPController.swift */,
+			);
+			path = XMPP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +419,7 @@
 				9DC4FE8E23917C3900ED0433 /* ReceivedMessageTableViewCell.swift in Sources */,
 				9D3CCA6B2395730400030D92 /* SettingViewController.swift in Sources */,
 				9D3CCA662393F97500030D92 /* UserDefault+Helper.swift in Sources */,
+				FFED8E9023D833B900FC938D /* LoginView.swift in Sources */,
 				9D3CCA6D2395762400030D92 /* BaseViewController.swift in Sources */,
 				4A7406BD2392768E00C0794A /* Message.swift in Sources */,
 				4A441966239625A300884A55 /* UserViewModel.swift in Sources */,
@@ -412,6 +427,7 @@
 				9D41EB1D23957CFF006086B3 /* UsersViewController.swift in Sources */,
 				9DBB58EE2393A08700C00563 /* LoginViewController.swift in Sources */,
 				9D3CCA642393EE3800030D92 /* CommonClass.swift in Sources */,
+				FF95318623ABD75B00542119 /* XMPPController.swift in Sources */,
 				4A44196C239625E100884A55 /* UserDataManager.swift in Sources */,
 				9DBB58E92393931900C00563 /* AppTabBarController.swift in Sources */,
 				9DBB58F02393A09400C00563 /* ProfileViewController.swift in Sources */,
@@ -568,7 +584,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4F7SW76LL6;
 				INFOPLIST_FILE = Friends/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,7 +604,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4F7SW76LL6;
 				INFOPLIST_FILE = Friends/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

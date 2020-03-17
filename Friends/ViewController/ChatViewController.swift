@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ChatViewController: BaseViewController {
 	
@@ -54,7 +55,9 @@ class ChatViewController: BaseViewController {
 	}
 	
 	@IBAction func actionSend(_ sender: Any) {
-		
+        let messageChild = Database.database().reference().child("messages").childByAutoId()
+        let value = ["text": messageTextView.text!]
+        messageChild.updateChildValues(value)
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?,
